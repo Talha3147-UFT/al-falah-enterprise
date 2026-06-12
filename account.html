@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png"><link rel="shortcut icon" href="assets/logo.png"><link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="nav-animation.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-lg sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4"><div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3"><img src="assets/logo.png" class="h-10 w-10 object-contain rounded-lg"><span class="text-lg font-bold text-gray-800">Al-Falah Enterprise</span></div>
+        <button id="menuBtn" class="text-gray-600 hover:text-emerald-600 p-2 focus:outline-none"><i class="fas fa-bars text-2xl" id="menuIcon"></i></button>
+    </div>
+    <div id="dropdownMenu" class="hidden pb-4 border-t mt-2 animate-fadeIn">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 pt-2">
+            <a href="dashboard.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-tachometer-alt w-5"></i>Dashboard</a>
+            <a href="purchases.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-shopping-cart w-5"></i>Purchases</a>
+            <a href="sales.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-chart-line w-5"></i>Sales</a>
+            <a href="expenses.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-money-bill-wave w-5"></i>Expenses</a>
+            <a href="profit-loss.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-calculator w-5"></i>P&L</a>
+            <a href="collections.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-layer-group w-5"></i>Collections</a>
+            <a href="balance.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-balance-scale w-5"></i>Balance</a>
+            <a href="due-tracker.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-hand-holding-usd w-5"></i>Due</a>
+            <a href="stock-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-boxes w-5"></i>Stock</a>
+            <a href="party-ledger.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-book w-5"></i>Ledger</a>
+            <a href="reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>Reports</a>
+            <a href="daily-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-clipboard-list w-5"></i>Summary</a>
+            <a href="invoice-generator.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-invoice w-5"></i>Invoice</a>
+            <a href="data-backup.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-database w-5"></i>Backup</a>
+            <a href="settings.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-cog w-5"></i>Settings</a>
+            <a href="account.html" class="menu-item px-4 py-3 rounded-lg text-emerald-600 bg-emerald-50 font-semibold flex items-center gap-2"><i class="fas fa-user-circle w-5"></i>Account</a>
+        </div>
+    </div></div></nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">👤 Account Settings</h1>
+
+        <!-- Profile Card -->
+        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+            <div class="flex items-center space-x-6">
+                <div class="bg-emerald-100 rounded-full p-6"><i class="fas fa-user text-4xl text-emerald-600"></i></div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800" id="displayUsername">Al-Falah Admin123</h2>
+                    <p class="text-gray-500" id="displayEmail">alfalahenterprise203@gmail.com</p>
+                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold mt-2">Administrator</span>
+                </div>
+            </div>
+            <div class="border-t mt-6 pt-4">
+                <p class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-2"></i>Member since: <span id="memberSince"></span></p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex space-x-4 mb-8">
+            <button onclick="switchAccountTab('changePassword')" id="changePasswordTab" class="px-6 py-3 rounded-lg font-semibold bg-emerald-600 text-white transition-all">
+                <i class="fas fa-key mr-2"></i>Change Password
+            </button>
+            <button onclick="switchAccountTab('updateProfile')" id="updateProfileTab" class="px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 transition-all">
+                <i class="fas fa-user-edit mr-2"></i>Update Profile
+            </button>
+        </div>
+
+        <!-- Change Password -->
+        <div id="changePasswordSection">
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">🔒 Change Password</h2>
+                <form id="changePasswordForm" class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                        <div class="relative">
+                            <input type="password" id="currentPassword" class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Enter current password" required>
+                            <button type="button" class="absolute right-3 top-3 text-gray-400" onclick="togglePasswordVisibility('currentPassword')"><i class="fas fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                        <input type="password" id="newPassword" class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Min 6 characters" required minlength="6">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Re-enter new password" required minlength="6">
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-all">
+                        <i class="fas fa-save mr-2"></i>Update Password
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Update Profile -->
+        <div id="updateProfileSection" class="hidden">
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">✏️ Update Profile</h2>
+                <form id="updateProfileForm" class="space-y-4 max-w-md">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                        <input type="text" id="updateUsername" class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" value="Al-Falah Admin123">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="updateEmail" class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" value="alfalahenterprise203@gmail.com">
+                    </div>
+                    <button type="submit" class="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-all">
+                        <i class="fas fa-save mr-2"></i>Update Profile
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="mt-8 text-center">
+            <button onclick="logout()" class="px-8 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all font-semibold">
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script src="js/session-guard.js"></script>
+    <script type="module" src="js/user-app.js"></script>
+    <script>
+        document.getElementById('menuBtn').addEventListener('click',function(){var m=document.getElementById('dropdownMenu');var i=document.getElementById('menuIcon');m.classList.toggle('hidden');i.className=m.classList.contains('hidden')?'fas fa-bars text-2xl':'fas fa-times text-2xl'});
+        var cp=window.location.pathname.split('/').pop();document.querySelectorAll('.menu-item').forEach(function(item){if(item.getAttribute('href')===cp){item.classList.remove('text-gray-600');item.classList.add('text-emerald-600','font-semibold','bg-emerald-50')}});
+    </script>
+</body>
+</html>

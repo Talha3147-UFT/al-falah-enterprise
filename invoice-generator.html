@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png"><link rel="shortcut icon" href="assets/logo.png"><link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="nav-animation.css">
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4"><div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3"><img src="assets/logo.png" class="h-10 w-10 object-contain rounded-lg"><span class="text-lg font-bold text-gray-800">Al-Falah Enterprise</span></div>
+        <button id="menuBtn" class="text-gray-600 hover:text-emerald-600 p-2 focus:outline-none"><i class="fas fa-bars text-2xl" id="menuIcon"></i></button>
+    </div>
+    <div id="dropdownMenu" class="hidden pb-4 border-t mt-2 animate-fadeIn">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 pt-2">
+            <a href="dashboard.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-tachometer-alt w-5"></i>Dashboard</a>
+            <a href="purchases.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-shopping-cart w-5"></i>Purchases</a>
+            <a href="sales.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-chart-line w-5"></i>Sales</a>
+            <a href="expenses.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-money-bill-wave w-5"></i>Expenses</a>
+            <a href="profit-loss.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-calculator w-5"></i>P&L</a>
+            <a href="collections.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-layer-group w-5"></i>Collections</a>
+            <a href="balance.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-balance-scale w-5"></i>Balance</a>
+            <a href="due-tracker.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-hand-holding-usd w-5"></i>Due</a>
+            <a href="stock-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-boxes w-5"></i>Stock</a>
+            <a href="party-ledger.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-book w-5"></i>Ledger</a>
+            <a href="reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>Reports</a>
+            <a href="daily-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-clipboard-list w-5"></i>Summary</a>
+            <a href="invoice-generator.html" class="menu-item px-4 py-3 rounded-lg text-emerald-600 bg-emerald-50 font-semibold flex items-center gap-2"><i class="fas fa-file-invoice w-5"></i>Invoice</a>
+            <a href="data-backup.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-database w-5"></i>Backup</a>
+            <a href="settings.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-cog w-5"></i>Settings</a>
+            <a href="account.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-user-circle w-5"></i>Account</a>
+        </div>
+    </div></div></nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">🧾 Invoice Generator</h1>
+
+        <div class="bg-white rounded-xl shadow-md p-8">
+            
+            <!-- Customer & Invoice Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="font-bold text-lg mb-3">Bill To:</h3>
+                    <div class="space-y-3">
+                        <input type="text" id="customerName" class="w-full px-4 py-2.5 border rounded-lg" placeholder="Customer/Company Name *">
+                        <input type="text" id="customerAddress" class="w-full px-4 py-2.5 border rounded-lg" placeholder="Address">
+                        <input type="text" id="customerPhone" class="w-full px-4 py-2.5 border rounded-lg" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-3">Invoice Details:</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-xs text-gray-500">Invoice Number</label>
+                            <input type="text" id="invoiceNumber" class="w-full px-4 py-2.5 border rounded-lg bg-gray-100" readonly>
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-500">Invoice Date</label>
+                            <input type="date" id="invoiceDate" class="w-full px-4 py-2.5 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-500">Due Date</label>
+                            <input type="date" id="dueDate" class="w-full px-4 py-2.5 border rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items Section -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-bold text-lg">Items:</h3>
+                    <button type="button" onclick="addItem()" class="text-emerald-600 hover:text-emerald-800 text-sm font-semibold">
+                        <i class="fas fa-plus-circle mr-1"></i>Add Item
+                    </button>
+                </div>
+                
+                <!-- Items List -->
+                <div id="itemsContainer" class="space-y-2">
+                    <!-- Items will be added here -->
+                </div>
+            </div>
+
+            <!-- Discount & Tax -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Discount (%)</label>
+                    <input type="number" id="discount" class="w-full px-4 py-2.5 border rounded-lg" value="0" min="0" max="100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Tax/VAT (%)</label>
+                    <input type="number" id="tax" class="w-full px-4 py-2.5 border rounded-lg" value="0" min="0" max="100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                </div>
+            </div>
+
+            <!-- Totals -->
+            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="text-gray-600">Subtotal:</span>
+                    <span class="font-semibold" id="subtotal">৳0.00</span>
+                </div>
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="text-gray-600">Discount:</span>
+                    <span class="text-red-600" id="discountAmount">-৳0.00</span>
+                </div>
+                <div class="flex justify-between text-sm mb-2">
+                    <span class="text-gray-600">Tax/VAT:</span>
+                    <span id="taxAmount">৳0.00</span>
+                </div>
+                <hr class="my-3 border-gray-300">
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Grand Total:</span>
+                    <span class="text-emerald-600" id="grandTotal">৳0.00</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-4">
+                <button type="button" onclick="printInvoice()" class="flex-1 bg-blue-600 text-white py-3.5 rounded-lg font-bold hover:bg-blue-700 transition-all">
+                    <i class="fas fa-print mr-2"></i>Print Invoice
+                </button>
+                <button type="button" onclick="generateAndPrint()" class="flex-1 bg-emerald-600 text-white py-3.5 rounded-lg font-bold hover:bg-emerald-700 transition-all">
+                    <i class="fas fa-file-invoice mr-2"></i>Generate & Print
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ INITIALIZE ============
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById('invoiceDate').value = today;
+        document.getElementById('dueDate').value = new Date(Date.now() + 7*86400000).toISOString().split('T')[0];
+        document.getElementById('invoiceNumber').value = 'INV-' + Date.now().toString().slice(-6);
+
+        // ============ ADD ITEM ============
+        function addItem() {
+            var container = document.getElementById('itemsContainer');
+            var div = document.createElement('div');
+            div.className = 'item-row grid grid-cols-12 gap-2 bg-gray-50 p-3 rounded-lg';
+            div.innerHTML = '' +
+                '<input type="text" class="col-span-12 md:col-span-5 px-3 py-2 border rounded-lg text-sm" placeholder="Item description">' +
+                '<div class="col-span-4 md:col-span-2">' +
+                    '<input type="number" class="w-full px-3 py-2 border rounded-lg text-sm qty" placeholder="Qty" value="1" min="1" onchange="calculateTotal()" onkeyup="calculateTotal()">' +
+                '</div>' +
+                '<div class="col-span-4 md:col-span-2">' +
+                    '<input type="number" class="w-full px-3 py-2 border rounded-lg text-sm price" placeholder="Price" step="0.01" min="0" onchange="calculateTotal()" onkeyup="calculateTotal()">' +
+                '</div>' +
+                '<div class="col-span-3 md:col-span-2">' +
+                    '<input type="text" class="w-full px-3 py-2 border rounded-lg bg-gray-100 text-sm text-right font-semibold total" placeholder="0.00" readonly>' +
+                '</div>' +
+                '<div class="col-span-1 flex items-center justify-center">' +
+                    '<button type="button" class="text-red-500 hover:text-red-700" onclick="removeItem(this)" title="Remove">' +
+                        '<i class="fas fa-times"></i>' +
+                    '</button>' +
+                '</div>';
+            container.appendChild(div);
+        }
+
+        window.addItem = addItem;
+
+        // ============ REMOVE ITEM ============
+        function removeItem(btn) {
+            var row = btn.closest('.item-row');
+            if (row) {
+                row.remove();
+                calculateTotal();
+            }
+        }
+
+        window.removeItem = removeItem;
+
+        // ============ CALCULATE TOTAL ============
+        function calculateTotal() {
+            var subtotal = 0;
+            var rows = document.querySelectorAll('.item-row');
+            
+            rows.forEach(function(row) {
+                var qtyInput = row.querySelector('.qty');
+                var priceInput = row.querySelector('.price');
+                var totalInput = row.querySelector('.total');
+                
+                if (qtyInput && priceInput && totalInput) {
+                    var qty = parseFloat(qtyInput.value) || 0;
+                    var price = parseFloat(priceInput.value) || 0;
+                    var total = qty * price;
+                    totalInput.value = total.toFixed(2);
+                    subtotal += total;
+                }
+            });
+            
+            var discountPercent = parseFloat(document.getElementById('discount').value) || 0;
+            var taxPercent = parseFloat(document.getElementById('tax').value) || 0;
+            
+            var discountAmount = subtotal * (discountPercent / 100);
+            var afterDiscount = subtotal - discountAmount;
+            var taxAmount = afterDiscount * (taxPercent / 100);
+            var grandTotal = afterDiscount + taxAmount;
+            
+            document.getElementById('subtotal').textContent = '৳' + subtotal.toFixed(2);
+            document.getElementById('discountAmount').textContent = '-৳' + discountAmount.toFixed(2);
+            document.getElementById('taxAmount').textContent = '৳' + taxAmount.toFixed(2);
+            document.getElementById('grandTotal').textContent = '৳' + grandTotal.toFixed(2);
+        }
+
+        window.calculateTotal = calculateTotal;
+
+        // ============ GET INVOICE DATA ============
+        function getInvoiceData() {
+            var items = [];
+            var rows = document.querySelectorAll('.item-row');
+            
+            rows.forEach(function(row) {
+                var descInput = row.querySelector('input[type="text"]');
+                var qtyInput = row.querySelector('.qty');
+                var priceInput = row.querySelector('.price');
+                var totalInput = row.querySelector('.total');
+                
+                if (descInput && qtyInput && priceInput && totalInput) {
+                    var desc = descInput.value.trim();
+                    if (desc) {
+                        items.push({
+                            desc: desc,
+                            qty: qtyInput.value,
+                            price: priceInput.value,
+                            total: totalInput.value
+                        });
+                    }
+                }
+            });
+            
+            return {
+                number: document.getElementById('invoiceNumber').value,
+                date: document.getElementById('invoiceDate').value,
+                dueDate: document.getElementById('dueDate').value,
+                customerName: document.getElementById('customerName').value.trim(),
+                customerAddress: document.getElementById('customerAddress').value.trim(),
+                customerPhone: document.getElementById('customerPhone').value.trim(),
+                items: items,
+                subtotal: document.getElementById('subtotal').textContent,
+                discountAmount: document.getElementById('discountAmount').textContent,
+                taxAmount: document.getElementById('taxAmount').textContent,
+                grandTotal: document.getElementById('grandTotal').textContent
+            };
+        }
+
+        // ============ PRINT INVOICE ============
+        window.printInvoice = function() {
+            var data = getInvoiceData();
+            
+            if (!data.customerName) {
+                alert('⚠️ Please enter customer name!');
+                return;
+            }
+            
+            if (data.items.length === 0) {
+                alert('⚠️ Please add at least one item!');
+                return;
+            }
+            
+            // Calculate first to ensure accuracy
+            calculateTotal();
+            
+            // Get fresh data after calculation
+            data = getInvoiceData();
+            
+            // Open print window
+            var printWindow = window.open('', '_blank', 'width=900,height=700');
+            
+            var html = '<!DOCTYPE html><html><head><title>Invoice ' + data.number + '</title>';
+            html += '<meta charset="UTF-8">';
+            html += '<style>';
+            html += '*{margin:0;padding:0;box-sizing:border-box}';
+            html += 'body{font-family:"Segoe UI",Arial,sans-serif;padding:40px;max-width:800px;margin:0 auto;color:#1a1a1a}';
+            html += '.header{text-align:center;border-bottom:3px solid #059669;padding-bottom:20px;margin-bottom:25px}';
+            html += '.header h1{color:#059669;font-size:28px;margin-bottom:5px}';
+            html += '.header h2{color:#333;font-size:22px;margin:10px 0}';
+            html += '.header p{color:#666;font-size:13px;margin:3px 0}';
+            html += '.flex{display:flex;justify-content:space-between;margin-bottom:25px;gap:20px}';
+            html += '.box{flex:1}';
+            html += '.box h3{color:#059669;font-size:14px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}';
+            html += '.box p{font-size:14px;color:#555;margin:4px 0}';
+            html += 'table{width:100%;border-collapse:collapse;margin:25px 0}';
+            html += 'thead{background:#059669}';
+            html += 'th{color:white;padding:12px 12px;text-align:left;font-size:13px;font-weight:600}';
+            html += 'td{padding:12px;border-bottom:1px solid #e5e7eb;font-size:14px}';
+            html += '.text-right{text-align:right}';
+            html += '.text-center{text-align:center}';
+            html += 'tbody tr:nth-child(even){background:#f9fafb}';
+            html += '.totals{text-align:right;margin-top:30px;padding:20px;background:#f9fafb;border-radius:8px}';
+            html += '.totals p{margin:6px 0;font-size:15px}';
+            html += '.grand{font-size:20px;font-weight:bold;color:#059669;margin-top:12px;padding-top:12px;border-top:2px solid #059669}';
+            html += '.footer{margin-top:40px;text-align:center;font-size:12px;color:#999;border-top:1px solid #ddd;padding-top:20px}';
+            html += '.footer p{margin:4px 0}';
+            html += '@media print{body{padding:25px}.print-btn{display:none}}';
+            html += '.print-btn{display:block;margin:30px auto;padding:14px 40px;background:#059669;color:white;border:none;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 4px 15px rgba(5,150,105,0.3)}';
+            html += '.print-btn:hover{background:#047857;transform:translateY(-2px)}';
+            html += '</style></head><body>';
+            
+            // Header
+            html += '<div class="header">';
+            html += '<h1>🏢 Al-Falah Enterprise</h1>';
+            html += '<p>📧 alfalahenterprise203@gmail.com</p>';
+            html += '<h2>INVOICE</h2>';
+            html += '</div>';
+            
+            // Info Section
+            html += '<div class="flex">';
+            html += '<div class="box"><h3>Bill To:</h3>';
+            html += '<p><strong>' + data.customerName + '</strong></p>';
+            if (data.customerAddress) html += '<p>' + data.customerAddress + '</p>';
+            if (data.customerPhone) html += '<p>📞 ' + data.customerPhone + '</p>';
+            html += '</div>';
+            html += '<div class="box" style="text-align:right"><h3>Invoice Details:</h3>';
+            html += '<p><strong>Invoice #:</strong> ' + data.number + '</p>';
+            html += '<p><strong>Date:</strong> ' + data.date + '</p>';
+            html += '<p><strong>Due Date:</strong> ' + data.dueDate + '</p>';
+            html += '</div></div>';
+            
+            // Items Table
+            html += '<table><thead><tr>';
+            html += '<th>Description</th><th class="text-center">Qty</th><th class="text-right">Unit Price</th><th class="text-right">Total</th>';
+            html += '</tr></thead><tbody>';
+            
+            for (var i = 0; i < data.items.length; i++) {
+                var item = data.items[i];
+                html += '<tr>';
+                html += '<td>' + item.desc + '</td>';
+                html += '<td class="text-center">' + item.qty + '</td>';
+                html += '<td class="text-right">৳' + parseFloat(item.price).toFixed(2) + '</td>';
+                html += '<td class="text-right">৳' + parseFloat(item.total).toFixed(2) + '</td>';
+                html += '</tr>';
+            }
+            
+            html += '</tbody></table>';
+            
+            // Totals
+            html += '<div class="totals">';
+            html += '<p>Subtotal: <strong>' + data.subtotal + '</strong></p>';
+            html += '<p>Discount: <strong style="color:#dc2626">' + data.discountAmount + '</strong></p>';
+            html += '<p>Tax/VAT: <strong>' + data.taxAmount + '</strong></p>';
+            html += '<p class="grand">Grand Total: ' + data.grandTotal + '</p>';
+            html += '</div>';
+            
+            // Footer
+            html += '<div class="footer">';
+            html += '<p>Thank you for your business! 🙏</p>';
+            html += '<p>© ' + new Date().getFullYear() + ' Al-Falah Enterprise | Business Management System</p>';
+            html += '<p>This is a computer-generated invoice.</p>';
+            html += '</div>';
+            
+            // Print Button
+            html += '<button class="print-btn" onclick="window.print()">🖨️ Print This Invoice</button>';
+            
+            html += '</body></html>';
+            
+            printWindow.document.write(html);
+            printWindow.document.close();
+            
+            // Auto-trigger print after page loads
+            setTimeout(function() {
+                printWindow.print();
+            }, 1000);
+        };
+
+        // ============ GENERATE & PRINT ============
+        window.generateAndPrint = function() {
+            calculateTotal();
+            setTimeout(function() {
+                printInvoice();
+            }, 300);
+        };
+
+        // ============ INITIAL SETUP ============
+        // Add first empty item row
+        addItem();
+        calculateTotal();
+
+        // ============ MOBILE MENU ============
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            var menu = document.getElementById('dropdownMenu');
+            var icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            icon.className = menu.classList.contains('hidden') ? 'fas fa-bars text-2xl' : 'fas fa-times text-2xl';
+        });
+
+        // ============ ACTIVE PAGE HIGHLIGHT ============
+        var currentPage = window.location.pathname.split('/').pop();
+        document.querySelectorAll('.menu-item').forEach(function(item) {
+            if (item.getAttribute('href') === currentPage) {
+                item.classList.remove('text-gray-600');
+                item.classList.add('text-emerald-600', 'font-semibold', 'bg-emerald-50');
+            }
+        });
+
+        console.log('✅ Invoice Generator Ready');
+    </script>
+    <script src="js/session-guard.js"></script>
+    <script type="module" src="js/user-app.js"></script>
+</body>
+</html>

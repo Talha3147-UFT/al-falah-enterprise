@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; }
+        
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .glass-light { background: rgba(30,30,30,0.95); backdrop-filter: blur(10px); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes lockPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); } 50% { box-shadow: 0 0 0 20px rgba(239,68,68,0); } }
+        
+        .animate-in { animation: fadeIn 0.3s ease-out; }
+        .slide-down { animation: slideDown 0.5s ease-out; }
+        .lock-pulse { animation: lockPulse 2s infinite; }
+        
+        .tab-active { background: linear-gradient(135deg, #059669, #047857); color: white; }
+        .tab-inactive { background: rgba(255,255,255,0.05); color: #9ca3af; }
+        .tab-inactive:hover { background: rgba(255,255,255,0.1); color: #e5e7eb; }
+        
+        .btn-danger { background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; transition: all 0.3s; }
+        .btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(220,38,38,0.4); }
+        .btn-warning { background: linear-gradient(135deg, #f59e0b, #d97706); color: #1f2937; transition: all 0.3s; }
+        
+        .input-field { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; color: white; font-size: 14px; transition: all 0.3s; }
+        .input-field:focus { outline: none; border-color: #059669; box-shadow: 0 0 0 3px rgba(5,150,105,0.2); }
+        .input-dark { width: 100%; padding: 12px 16px; background: #1a1a1a; border: 2px solid #333; border-radius: 12px; color: white; font-size: 14px; transition: all 0.3s; }
+        .input-dark:focus { outline: none; border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,0.1); }
+        
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; }
+        .badge-main { background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+        .badge-admin { background: rgba(5,150,105,0.2); color: #34d399; border: 1px solid rgba(5,150,105,0.3); }
+        .table-row { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .table-row:hover { background: rgba(255,255,255,0.03); }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] min-h-screen">
+    
+    <!-- SECURITY GATE -->
+    <div id="securityGate" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95">
+        <div class="glass-light rounded-3xl shadow-2xl p-10 max-w-md w-full mx-4 slide-down">
+            
+            <div class="text-center mb-8">
+                <img src="assets/logo.png" alt="Logo" class="h-24 w-24 mx-auto object-contain rounded-2xl shadow-lg mb-4">
+                <div class="bg-red-500 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto lock-pulse">
+                    <i class="fas fa-shield-halting text-white text-2xl"></i>
+                </div>
+                <h2 class="text-xl font-bold text-white mt-3">🔐 Admin Access</h2>
+                <p class="text-gray-400 text-sm mt-1">Al-Falah Enterprise</p>
+            </div>
+            
+            <form id="securityForm" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                    <input type="email" id="adminEmail" class="input-dark" required value="alfalahenterprise203@gmail.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <div class="relative">
+                        <input type="password" id="adminPassword" class="input-dark" required value="Admin-Al3">
+                        <button type="button" class="absolute right-3 top-3 text-gray-400" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" id="unlockBtn" class="btn-danger w-full py-3.5 rounded-xl font-bold text-lg">
+                    <i class="fas fa-lock-open mr-2"></i>Unlock Admin Panel
+                </button>
+            </form>
+            
+            <div class="mt-4 text-center">
+                <p class="text-xs text-gray-500">Failed: <span id="failedCount" class="font-bold text-red-500">0</span>/3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel" class="hidden">
+        
+        <nav class="glass sticky top-0 z-40 border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="Logo" class="h-10 w-10 object-contain rounded-xl">
+                    <div>
+                        <h1 class="text-lg font-bold text-white">Admin Panel</h1>
+                        <p class="text-xs text-gray-500" id="loggedInAs">-</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-xs text-gray-400">Secured</span>
+                    <button onclick="lockPanel()" class="px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg">Lock</button>
+                    <a href="login.html" class="px-4 py-2 text-sm bg-white/10 text-white rounded-lg hover:bg-white/20">Login</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            
+            <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mb-8 flex items-start gap-3">
+                <i class="fas fa-info-circle text-yellow-400 text-lg mt-0.5"></i>
+                <div>
+                    <p class="text-yellow-400 font-semibold text-sm">⚠️ Main Admin Protection</p>
+                    <p class="text-yellow-500/70 text-xs mt-1">Main Admin is PROTECTED. Only Admin Users can be deleted.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+                <button onclick="switchTab('createAdmin')" id="btnCreateAdmin" class="px-5 py-2.5 rounded-xl font-semibold text-sm tab-active">
+                    <i class="fas fa-crown mr-2"></i>Create Admin
+                </button>
+                <button onclick="switchTab('users')" id="btnUsers" class="px-5 py-2.5 rounded-xl font-semibold text-sm tab-inactive">
+                    <i class="fas fa-users mr-2"></i>All Users
+                </button>
+                <button onclick="switchTab('addUser')" id="btnAddUser" class="px-5 py-2.5 rounded-xl font-semibold text-sm tab-inactive">
+                    <i class="fas fa-user-plus mr-2"></i>Add Admin User
+                </button>
+                <button onclick="switchTab('reports')" id="btnReports" class="px-5 py-2.5 rounded-xl font-semibold text-sm tab-inactive">
+                    <i class="fas fa-file-alt mr-2"></i>User Reports
+                </button>
+                <button onclick="switchTab('logs')" id="btnLogs" class="px-5 py-2.5 rounded-xl font-semibold text-sm tab-inactive">
+                    <i class="fas fa-clock mr-2"></i>Activity Logs
+                </button>
+            </div>
+
+            <!-- Create Admin Tab -->
+            <div id="tabCreateAdmin" class="animate-in">
+                <div class="card max-w-lg mx-auto">
+                    <div class="text-center mb-8">
+                        <div class="bg-yellow-500/20 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-crown text-yellow-400 text-2xl"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-white">Create Main Admin</h2>
+                        <p class="text-gray-400 text-sm mt-2">Full system access account</p>
+                    </div>
+                    <form id="createAdminForm" class="space-y-4">
+                        <input type="text" id="adminUsername" class="input-field" value="Al-Falah Admin123" required>
+                        <input type="email" id="adminEmailInput" class="input-field" value="alfalahenterprise203@gmail.com" required>
+                        <input type="password" id="adminPasswordInput" class="input-field" value="Admin-Al3" required minlength="6">
+                        <button type="submit" class="btn-warning w-full py-3 rounded-xl font-bold">Create Main Admin</button>
+                    </form>
+                    <div id="createAdminMsg" class="mt-4 p-4 rounded-xl text-center text-sm hidden"></div>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="tabUsers" class="hidden animate-in">
+                <div class="card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold text-white"><i class="fas fa-users mr-2 text-emerald-400"></i>All Users</h2>
+                        <input type="text" id="searchUser" class="input-field w-64" placeholder="Search..." onkeyup="searchUsers()">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="p-4 text-left text-xs text-gray-400">Name</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Email</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Role</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Status</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Joined</th>
+                                    <th class="p-4 text-center text-xs text-gray-400">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr><td colspan="6" class="text-center py-12 text-gray-500">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add User Tab -->
+            <div id="tabAddUser" class="hidden animate-in">
+                <div class="card max-w-lg mx-auto">
+                    <div class="text-center mb-8">
+                        <div class="bg-emerald-500/20 rounded-2xl w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-shield text-emerald-400 text-2xl"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-white">Add Admin User</h2>
+                        <p class="text-gray-400 text-sm mt-2">Can view data & submit reports</p>
+                    </div>
+                    <form id="addUserForm" class="space-y-4">
+                        <input type="text" id="newUsername" class="input-field" placeholder="Full Name" required>
+                        <input type="email" id="newEmail" class="input-field" placeholder="Email" required>
+                        <input type="password" id="newPassword" class="input-field" placeholder="Password" required minlength="6">
+                        <input type="text" class="input-field bg-white/5 text-gray-400 cursor-not-allowed" value="Admin User" readonly disabled>
+                        <button type="submit" class="bg-emerald-600 text-white w-full py-3 rounded-xl font-bold hover:bg-emerald-700">Add Admin User</button>
+                    </form>
+                    <div id="addUserMsg" class="mt-4 p-4 rounded-xl text-center text-sm hidden"></div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="tabReports" class="hidden animate-in">
+                <div class="card">
+                    <h2 class="text-xl font-bold text-white mb-6"><i class="fas fa-file-alt mr-2 text-purple-400"></i>User Submitted Reports</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="p-4 text-left text-xs text-gray-400">Date</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Submitted By</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Title</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Type</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Status</th>
+                                    <th class="p-4 text-center text-xs text-gray-400">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportsTableBody">
+                                <tr><td colspan="6" class="text-center py-12 text-gray-500">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Tab -->
+            <div id="tabLogs" class="hidden animate-in">
+                <div class="card">
+                    <h2 class="text-xl font-bold text-white mb-6"><i class="fas fa-clock mr-2 text-blue-400"></i>Activity Logs</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="p-4 text-left text-xs text-gray-400">Date & Time</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Email</th>
+                                    <th class="p-4 text-left text-xs text-gray-400">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsTableBody">
+                                <tr><td colspan="3" class="text-center py-12 text-gray-500">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+        import { doc, setDoc, getDoc, getDocs, collection, deleteDoc, addDoc, query, orderBy, limit, where } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+        let failedAttempts = parseInt(sessionStorage.getItem('adminFails') || '0');
+        document.getElementById('failedCount').textContent = failedAttempts;
+        if (failedAttempts >= 3) {
+            document.getElementById('unlockBtn').disabled = true;
+            document.getElementById('unlockBtn').classList.add('opacity-50');
+        }
+
+        // Tab switching
+        window.switchTab = function(tab) {
+            ['createAdmin','users','addUser','reports','logs'].forEach(t => {
+                const el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+                if (el) el.classList.add('hidden');
+            });
+            ['CreateAdmin','Users','AddUser','Reports','Logs'].forEach(t => {
+                const btn = document.getElementById('btn' + t);
+                if (btn) btn.className = 'px-5 py-2.5 rounded-xl font-semibold text-sm tab-inactive';
+            });
+            const tabMap = { createAdmin:'tabCreateAdmin', users:'tabUsers', addUser:'tabAddUser', reports:'tabReports', logs:'tabLogs' };
+            const el = document.getElementById(tabMap[tab]);
+            const btn = document.getElementById('btn' + tab.charAt(0).toUpperCase() + tab.slice(1));
+            if (el) el.classList.remove('hidden');
+            if (btn) btn.className = 'px-5 py-2.5 rounded-xl font-semibold text-sm tab-active';
+            if (tab === 'users') loadUsers();
+            if (tab === 'reports') loadReports();
+            if (tab === 'logs') loadLogs();
+        };
+
+        // Auth check
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('securityGate').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('loggedInAs').textContent = user.email;
+                loadUsers();
+            }
+        });
+
+        // Admin login
+        document.getElementById('securityForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (failedAttempts >= 3) { Swal.fire({ icon: 'error', title: 'Blocked' }); return; }
+            
+            const email = document.getElementById('adminEmail').value.trim();
+            const password = document.getElementById('adminPassword').value;
+            
+            Swal.fire({ title: 'Verifying...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+            
+            try {
+                const uc = await signInWithEmailAndPassword(auth, email, password);
+                const userSnap = await getDoc(doc(db, 'users', uc.user.uid));
+                const role = userSnap.exists() ? userSnap.data().role : 'user';
+                
+                if (role !== 'main_admin' && role !== 'admin') {
+                    await signOut(auth);
+                    throw new Error('Access denied!');
+                }
+                
+                try { await addDoc(collection(db, 'admin_access_logs'), { email, success: true, timestamp: new Date().toISOString() }); } catch(e) {}
+                
+                sessionStorage.setItem('adminFails', '0');
+                failedAttempts = 0;
+                document.getElementById('failedCount').textContent = '0';
+                document.getElementById('unlockBtn').disabled = false;
+                document.getElementById('unlockBtn').classList.remove('opacity-50');
+                
+                document.getElementById('securityGate').classList.add('hidden');
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('loggedInAs').textContent = email;
+                
+                Swal.fire({ icon: 'success', title: 'Welcome!', timer: 1500, showConfirmButton: false });
+                loadUsers();
+                
+            } catch(err) {
+                failedAttempts++;
+                sessionStorage.setItem('adminFails', failedAttempts.toString());
+                document.getElementById('failedCount').textContent = failedAttempts;
+                try { await addDoc(collection(db, 'admin_access_logs'), { email, success: false, timestamp: new Date().toISOString() }); } catch(e) {}
+                Swal.fire({ icon: 'error', title: 'Access Denied', text: err.message + ' (' + failedAttempts + '/3)' });
+                if (failedAttempts >= 3) {
+                    document.getElementById('unlockBtn').disabled = true;
+                    document.getElementById('unlockBtn').classList.add('opacity-50');
+                }
+            }
+        });
+
+        // Create main admin
+        document.getElementById('createAdminForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('createAdminMsg');
+            msg.classList.remove('hidden'); msg.innerHTML = 'Creating...';
+            msg.className = 'mt-4 p-4 rounded-xl text-center text-sm bg-blue-500/10 text-blue-400';
+            try {
+                const uc = await createUserWithEmailAndPassword(auth, document.getElementById('adminEmailInput').value, document.getElementById('adminPasswordInput').value);
+                await setDoc(doc(db, 'users', uc.user.uid), {
+                    username: document.getElementById('adminUsername').value,
+                    email: document.getElementById('adminEmailInput').value,
+                    role: 'main_admin', isProtected: true, canBeDeleted: false,
+                    createdAt: new Date().toISOString()
+                });
+                msg.innerHTML = '✅ Main Admin created!';
+                msg.className = 'mt-4 p-4 rounded-xl text-center text-sm bg-emerald-500/10 text-emerald-400';
+                Swal.fire({ icon: 'success', title: 'Created!', confirmButtonColor: '#059669' });
+            } catch(err) {
+                msg.innerHTML = err.code === 'auth/email-already-in-use' ? 'Already exists!' : err.message;
+                msg.className = 'mt-4 p-4 rounded-xl text-center text-sm ' + (err.code === 'auth/email-already-in-use' ? 'bg-yellow-500/10 text-yellow-400' : 'bg-red-500/10 text-red-400');
+            }
+        });
+
+        // Add admin user
+        document.getElementById('addUserForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('addUserMsg');
+            msg.classList.remove('hidden'); msg.innerHTML = 'Adding...';
+            msg.className = 'mt-4 p-4 rounded-xl text-center text-sm bg-blue-500/10 text-blue-400';
+            
+            const newUsername = document.getElementById('newUsername').value.trim();
+            const newEmail = document.getElementById('newEmail').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+            
+            if (!newUsername || !newEmail || !newPassword) {
+                msg.innerHTML = 'All fields required!';
+                msg.className = 'mt-4 p-4 rounded-xl text-center text-sm bg-red-500/10 text-red-400';
+                return;
+            }
+            
+            try {
+                const currentUser = auth.currentUser;
+                const adminEmail = currentUser.email;
+                const adminPassword = document.getElementById('adminPassword').value || 'Admin-Al3';
+                
+                const uc = await createUserWithEmailAndPassword(auth, newEmail, newPassword);
+                await setDoc(doc(db, 'users', uc.user.uid), {
+                    username: newUsername, email: newEmail, role: 'admin',
+                    isProtected: false, canBeDeleted: true,
+                    createdBy: currentUser.uid, createdByEmail: adminEmail,
+                    createdAt: new Date().toISOString()
+                });
+                
+                await signOut(auth);
+                await signInWithEmailAndPassword(auth, adminEmail, adminPassword);
+                
+                msg.innerHTML = '✅ Admin user added!';
+                msg.className = 'mt-4 p-4 rounded-xl text-center text-sm bg-emerald-500/10 text-emerald-400';
+                document.getElementById('addUserForm').reset();
+                loadUsers();
+                Swal.fire({ icon: 'success', title: 'Added!', confirmButtonColor: '#059669' });
+            } catch(err) {
+                msg.innerHTML = err.code === 'auth/email-already-in-use' ? 'Email exists!' : err.message;
+                msg.className = 'mt-4 p-4 rounded-xl text-center text-sm ' + (err.code === 'auth/email-already-in-use' ? 'bg-yellow-500/10 text-yellow-400' : 'bg-red-500/10 text-red-400');
+            }
+        });
+
+        // Load users
+        async function loadUsers() {
+            const tbody = document.getElementById('usersTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-gray-500">Loading...</td></tr>';
+            try {
+                const snap = await getDocs(collection(db, 'users'));
+                tbody.innerHTML = '';
+                if (snap.empty) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-gray-500">No users</td></tr>'; return; }
+                snap.forEach(d => {
+                    const data = d.data();
+                    const isMainAdmin = data.role === 'main_admin' || data.isProtected === true;
+                    const roleBadge = isMainAdmin ? '<span class="px-3 py-1 rounded-full text-xs font-semibold badge-main">👑 Main Admin</span>' : '<span class="px-3 py-1 rounded-full text-xs font-semibold badge-admin">⭐ Admin User</span>';
+                    const status = isMainAdmin ? '<span class="text-yellow-400 text-xs">🔒 Protected</span>' : '<span class="text-green-400 text-xs">✓ Active</span>';
+                    const action = isMainAdmin ? '<span class="text-gray-500 text-xs">—</span>' : `<button onclick="deleteUser('${d.id}','${data.username}')" class="bg-red-500/20 hover:bg-red-500/30 text-red-400 px-3 py-1.5 rounded-lg text-xs"><i class="fas fa-trash-alt mr-1"></i>Delete</button>`;
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    tr.innerHTML = `<td class="p-4 text-white font-medium">${data.username || '-'}</td><td class="p-4 text-gray-400 text-sm">${data.email || '-'}</td><td class="p-4">${roleBadge}</td><td class="p-4">${status}</td><td class="p-4 text-gray-500 text-xs">${data.createdAt ? new Date(data.createdAt).toLocaleDateString() : '-'}</td><td class="p-4 text-center">${action}</td>`;
+                    tbody.appendChild(tr);
+                });
+            } catch(e) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-red-400">Error</td></tr>'; }
+        }
+
+        // Delete user
+        window.deleteUser = async function(uid, name) {
+            const userSnap = await getDoc(doc(db, 'users', uid));
+            if (!userSnap.exists()) { Swal.fire({ icon: 'error', title: 'Error' }); return; }
+            const userData = userSnap.data();
+            if (userData.role === 'main_admin' || userData.isProtected) {
+                Swal.fire({ icon: 'error', title: '🔒 Protected', text: 'Main Admin cannot be deleted!' });
+                return;
+            }
+            const result = await Swal.fire({ title: 'Delete?', html: `Delete <b>${name}</b>?`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#dc2626', confirmButtonText: 'Delete' });
+            if (result.isConfirmed) { await deleteDoc(doc(db, 'users', uid)); Swal.fire({ icon: 'success', title: 'Deleted!', timer: 1500 }); loadUsers(); }
+        };
+
+        window.searchUsers = function() {
+            const term = document.getElementById('searchUser')?.value.toLowerCase() || '';
+            document.querySelectorAll('#usersTableBody tr').forEach(row => { row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none'; });
+        };
+
+        // Load reports
+        async function loadReports() {
+            const tbody = document.getElementById('reportsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-gray-500">Loading...</td></tr>';
+            try {
+                const q = query(collection(db, 'user_reports'), orderBy('createdAt', 'desc'), limit(50));
+                const snap = await getDocs(q);
+                tbody.innerHTML = '';
+                if (snap.empty) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-gray-500">No reports</td></tr>'; return; }
+                snap.forEach(d => {
+                    const data = d.data();
+                    const statusBadge = data.status === 'reviewed' ? '<span class="text-green-400 text-xs">✅ Reviewed</span>' : '<span class="text-yellow-400 text-xs">📋 Pending</span>';
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    tr.innerHTML = `<td class="p-4 text-gray-400 text-xs">${data.date || '-'}</td><td class="p-4 text-white text-sm">${data.submittedBy || '-'}</td><td class="p-4 text-white text-sm">${data.title || '-'}</td><td class="p-4 text-gray-400 text-xs">${data.type || '-'}</td><td class="p-4">${statusBadge}</td><td class="p-4 text-center"><button onclick="viewReport('${d.id}')" class="text-blue-400 hover:text-blue-300 text-xs mr-2"><i class="fas fa-eye"></i></button><button onclick="deleteReport('${d.id}')" class="text-red-400 hover:text-red-300 text-xs"><i class="fas fa-trash"></i></button></td>`;
+                    tbody.appendChild(tr);
+                });
+            } catch(e) { tbody.innerHTML = '<tr><td colspan="6" class="text-center py-12 text-red-400">Error</td></tr>'; }
+        }
+
+        window.viewReport = async function(id) {
+            const snap = await getDoc(doc(db, 'user_reports', id));
+            if (snap.exists()) {
+                const data = snap.data();
+                Swal.fire({
+                    title: data.title,
+                    html: `<div class="text-left"><p><b>By:</b> ${data.submittedBy}</p><p><b>Date:</b> ${data.date}</p><p><b>Type:</b> ${data.type}</p><p><b>Status:</b> ${data.status}</p><hr><p><b>Content:</b></p><p class="text-sm">${data.content}</p></div>`,
+                    confirmButtonColor: '#059669',
+                    showCancelButton: true,
+                    cancelButtonText: 'Close',
+                    confirmButtonText: data.status === 'reviewed' ? 'Already Reviewed' : 'Mark as Reviewed'
+                }).then(async (result) => {
+                    if (result.isConfirmed && data.status !== 'reviewed') {
+                        await setDoc(doc(db, 'user_reports', id), {
+                            status: 'reviewed',
+                            reviewedBy: auth.currentUser?.email || 'Main Admin',
+                            reviewedAt: new Date().toISOString()
+                        }, { merge: true });
+                        Swal.fire({ icon: 'success', title: 'Reviewed!', timer: 1500 });
+                        loadReports();
+                    }
+                });
+            }
+        };
+
+        window.deleteReport = async function(id) {
+            const r = await Swal.fire({ title: 'Delete?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33' });
+            if (r.isConfirmed) { await deleteDoc(doc(db, 'user_reports', id)); Swal.fire({ icon: 'success', title: 'Deleted!', timer: 1500 }); loadReports(); }
+        };
+
+        // Load logs
+        async function loadLogs() {
+            const tbody = document.getElementById('logsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '<tr><td colspan="3" class="text-center py-12 text-gray-500">Loading...</td></tr>';
+            try {
+                const q = query(collection(db, 'admin_access_logs'), orderBy('timestamp', 'desc'), limit(50));
+                const snap = await getDocs(q);
+                tbody.innerHTML = '';
+                if (snap.empty) { tbody.innerHTML = '<tr><td colspan="3" class="text-center py-12 text-gray-500">No logs</td></tr>'; return; }
+                snap.forEach(d => {
+                    const data = d.data();
+                    const status = data.success ? '<span class="text-emerald-400">✓ Success</span>' : '<span class="text-red-400">✗ Failed</span>';
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row';
+                    tr.innerHTML = `<td class="p-4 text-gray-400 text-xs">${new Date(data.timestamp).toLocaleString()}</td><td class="p-4 text-gray-300 text-sm">${data.email||'-'}</td><td class="p-4">${status}</td>`;
+                    tbody.appendChild(tr);
+                });
+            } catch(e) { tbody.innerHTML = '<tr><td colspan="3" class="text-center py-12 text-red-400">Error</td></tr>'; }
+        }
+
+        window.togglePassword = function() {
+            const inp = document.getElementById('adminPassword');
+            const icon = document.getElementById('toggleIcon');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+            icon.classList.toggle('fa-eye'); icon.classList.toggle('fa-eye-slash');
+        };
+
+        window.lockPanel = async function() {
+            await signOut(auth);
+            sessionStorage.setItem('adminFails', '0');
+            failedAttempts = 0;
+            document.getElementById('failedCount').textContent = '0';
+            document.getElementById('unlockBtn').disabled = false;
+            document.getElementById('unlockBtn').classList.remove('opacity-50');
+            document.getElementById('securityGate').classList.remove('hidden');
+            document.getElementById('adminPanel').classList.add('hidden');
+        };
+
+        loadUsers();
+        console.log('✅ Admin Panel Ready');
+    </script>
+</body>
+</html>

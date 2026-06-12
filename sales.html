@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png"><link rel="shortcut icon" href="assets/logo.png"><link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="nav-animation.css">
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4"><div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3"><img src="assets/logo.png" class="h-10 w-10 object-contain rounded-lg"><span class="text-lg font-bold text-gray-800">Al-Falah Enterprise</span></div>
+        <button id="menuBtn" class="text-gray-600 hover:text-emerald-600 p-2 focus:outline-none"><i class="fas fa-bars text-2xl" id="menuIcon"></i></button>
+    </div>
+    <div id="dropdownMenu" class="hidden pb-4 border-t mt-2 animate-fadeIn">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 pt-2">
+            <a href="dashboard.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-tachometer-alt w-5"></i>Dashboard</a>
+            <a href="purchases.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-shopping-cart w-5"></i>Purchases</a>
+            <a href="sales.html" class="menu-item px-4 py-3 rounded-lg text-emerald-600 bg-emerald-50 font-semibold flex items-center gap-2"><i class="fas fa-chart-line w-5"></i>Sales</a>
+            <a href="expenses.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-money-bill-wave w-5"></i>Expenses</a>
+            <a href="profit-loss.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-calculator w-5"></i>P&L</a>
+            <a href="collections.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-layer-group w-5"></i>Collections</a>
+            <a href="balance.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-balance-scale w-5"></i>Balance</a>
+            <a href="due-tracker.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-hand-holding-usd w-5"></i>Due</a>
+            <a href="stock-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-boxes w-5"></i>Stock</a>
+            <a href="party-ledger.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-book w-5"></i>Ledger</a>
+            <a href="reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>Reports</a>
+            <a href="daily-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-clipboard-list w-5"></i>Summary</a>
+            <a href="invoice-generator.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-invoice w-5"></i>Invoice</a>
+            <a href="data-backup.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-database w-5"></i>Backup</a>
+            <a href="settings.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-cog w-5"></i>Settings</a>
+            <a href="account.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-user-circle w-5"></i>Account</a>
+            <a href="user-reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>User Reports</a>
+        </div>
+    </div></div></nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">💰 Daily Sales</h1>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- LEFT: Sales Form -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Record New Sale</h2>
+                    
+                    <div class="space-y-4">
+
+                        <!-- Product Select -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                <i class="fas fa-box text-emerald-600 mr-1"></i>Select Product *
+                            </label>
+                            <select id="productSelect" class="w-full px-4 py-3 border rounded-lg text-base" onchange="handleProductSelect()">
+                                <option value="">-- Choose a product --</option>
+                            </select>
+                        </div>
+
+                        <!-- Product Details -->
+                        <div id="productDetails" class="space-y-4" style="display:none;">
+                            <div class="bg-blue-50 p-4 rounded-lg space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span>Stock Available:</span>
+                                    <span class="font-semibold" id="stockAvailable">0</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span>Buy Price/Unit:</span>
+                                    <span class="font-semibold" id="purchasePrice">৳0</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Quantity to Sell *</label>
+                                <input type="number" id="sellQuantity" class="w-full px-4 py-3 border rounded-lg text-base" 
+                                       placeholder="Enter quantity" min="1">
+                                <small class="text-gray-500" id="maxQuantity"></small>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Selling Price (Per Unit) *</label>
+                                <input type="number" id="sellingPrice" class="w-full px-4 py-3 border rounded-lg text-base" 
+                                       placeholder="Price per unit" step="0.01">
+                            </div>
+
+                                                    <!-- Customer Name -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                <i class="fas fa-user text-emerald-600 mr-1"></i>Customer Name *
+                            </label>
+                            <input type="text" id="customerName" class="w-full px-4 py-3 border rounded-lg text-base" 
+                                   placeholder="কার কাছে বিক্রি করলেন?">
+                        </div>
+
+                        <!-- Customer Phone -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                <i class="fas fa-phone text-emerald-600 mr-1"></i>Customer Phone
+                            </label>
+                            <input type="text" id="customerPhone" class="w-full px-4 py-3 border rounded-lg text-base" 
+                                   placeholder="ফোন নাম্বার (optional)">
+                        </div>
+
+                            <div id="profitLossDisplay" style="display:none;" class="p-4 rounded-lg"></div>
+
+                            <button onclick="recordSale()" class="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700">
+                                <i class="fas fa-cart-plus mr-2"></i>Record Sale
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Sales History -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-md p-4 mb-4">
+                    <div class="flex flex-wrap gap-4 items-center justify-between">
+                        <div class="flex gap-2 items-center">
+                            <label class="text-sm font-medium">Date:</label>
+                            <input type="date" id="filterDate" class="px-4 py-2 border rounded-lg" onchange="loadSalesHistory()">
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="printSalesReport()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">Print</button>
+                            <button onclick="exportSalesCSV()" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm">CSV</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="table-container">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-emerald-600 text-white">
+                                    <th class="p-3 text-left text-sm">Date</th>
+                                    <th class="p-3 text-left text-sm">Customer</th>
+                                    <th class="p-3 text-left text-sm">Product</th>
+                                    <th class="p-3 text-center text-sm">Qty</th>
+                                    <th class="p-3 text-right text-sm">Price</th>
+                                    <th class="p-3 text-right text-sm">Revenue</th>
+                                    <th class="p-3 text-right text-sm">P/L</th>
+                                    <th class="p-3 text-center text-sm no-print">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="salesTableBody">
+                                <tr><td colspan="8" class="text-center py-8 text-gray-500">Loading sales...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/user-app.js"></script>
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+        function FC(a) { return '৳' + parseFloat(a || 0).toLocaleString('en-BD', {minimumFractionDigits:2}); }
+        function TD() { return new Date().toISOString().split('T')[0]; }
+        function UID() { const s = localStorage.getItem('alfalah_user') || sessionStorage.getItem('alfalah_user'); if(s){try{return JSON.parse(s).uid}catch(e){}} return auth.currentUser?.uid; }
+
+        // ============ LOAD PRODUCTS ============
+        async function loadProducts() {
+            var uid = UID();
+            if (!uid) { document.getElementById('productSelect').innerHTML = '<option value="">Please login first</option>'; return; }
+            
+            var sel = document.getElementById('productSelect');
+            sel.innerHTML = '<option value="">Loading products...</option>';
+            
+            try {
+                var snap = await getDocs(query(collection(db, 'purchases'), where('userId', '==', uid)));
+                sel.innerHTML = '<option value="">-- Choose a product --</option>';
+                
+                var count = 0;
+                snap.forEach(function(d) {
+                    var data = d.data();
+                    if (data.stockRemaining > 0) {
+                        var opt = document.createElement('option');
+                        opt.value = d.id;
+                        opt.textContent = data.productName + ' - Stock: ' + data.stockRemaining + ' | Buy: ৳' + data.price + '/pc';
+                        opt.setAttribute('data-stock', data.stockRemaining);
+                        opt.setAttribute('data-price', data.price);
+                        opt.setAttribute('data-name', data.productName);
+                        opt.setAttribute('data-foundation', data.foundationName || '');
+                        sel.appendChild(opt);
+                        count++;
+                    }
+                });
+                
+                if (count === 0) sel.innerHTML += '<option value="" disabled>No products in stock</option>';
+                console.log('Products loaded:', count);
+            } catch(e) { sel.innerHTML = '<option value="">Error loading products</option>'; }
+        }
+
+        // ============ PRODUCT SELECT ============
+        window.handleProductSelect = function() {
+            var sel = document.getElementById('productSelect');
+            var details = document.getElementById('productDetails');
+            
+            if (!sel.value) { details.style.display = 'none'; return; }
+            
+            var opt = sel.options[sel.selectedIndex];
+            document.getElementById('stockAvailable').textContent = opt.getAttribute('data-stock');
+            document.getElementById('purchasePrice').textContent = FC(parseFloat(opt.getAttribute('data-price')));
+            document.getElementById('sellQuantity').max = opt.getAttribute('data-stock');
+            document.getElementById('sellQuantity').value = '';
+            document.getElementById('sellingPrice').value = '';
+            document.getElementById('maxQuantity').textContent = 'Max: ' + opt.getAttribute('data-stock') + ' units';
+            details.style.display = 'block';
+            document.getElementById('profitLossDisplay').style.display = 'none';
+        };
+
+        // ============ CALCULATE P&L ============
+        function calcPL() {
+            var sel = document.getElementById('productSelect');
+            if (!sel.value) return;
+            
+            var opt = sel.options[sel.selectedIndex];
+            var bp = parseFloat(opt.getAttribute('data-price')) || 0;
+            var qty = parseInt(document.getElementById('sellQuantity').value) || 0;
+            var sp = parseFloat(document.getElementById('sellingPrice').value) || 0;
+            
+            var disp = document.getElementById('profitLossDisplay');
+            if (qty <= 0 || sp <= 0) { disp.style.display = 'none'; return; }
+            
+            var cost = bp * qty;
+            var revenue = sp * qty;
+            var pl = revenue - cost;
+            
+            disp.style.display = 'block';
+            if (pl >= 0) {
+                disp.className = 'bg-green-50 p-4 rounded-lg border border-green-300';
+                disp.innerHTML = '<div class="flex justify-between"><span>Cost:</span><span>' + FC(cost) + '</span></div><div class="flex justify-between"><span>Revenue:</span><span>' + FC(revenue) + '</span></div><hr class="my-2"><div class="flex justify-between font-bold text-green-700"><span>📈 PROFIT:</span><span>' + FC(pl) + '</span></div>';
+            } else {
+                disp.className = 'bg-red-50 p-4 rounded-lg border border-red-300';
+                disp.innerHTML = '<div class="flex justify-between"><span>Cost:</span><span>' + FC(cost) + '</span></div><div class="flex justify-between"><span>Revenue:</span><span>' + FC(revenue) + '</span></div><hr class="my-2"><div class="flex justify-between font-bold text-red-700"><span>📉 LOSS:</span><span>' + FC(Math.abs(pl)) + '</span></div>';
+            }
+        }
+
+        document.getElementById('sellQuantity').addEventListener('input', calcPL);
+        document.getElementById('sellQuantity').addEventListener('change', calcPL);
+        document.getElementById('sellingPrice').addEventListener('input', calcPL);
+        document.getElementById('sellingPrice').addEventListener('change', calcPL);
+
+        // ============ RECORD SALE ============
+        window.recordSale = async function() {
+            var uid = UID();
+            if (!uid) { Swal.fire({ icon: 'error', title: 'Error', text: 'Please login again!' }); return; }
+            
+            var sel = document.getElementById('productSelect');
+            if (!sel.value) { Swal.fire({ icon: 'warning', title: 'Error', text: 'Please select a product!' }); return; }
+            
+            var customerName = document.getElementById('customerName').value.trim();
+            if (!customerName) { Swal.fire({ icon: 'warning', title: 'Error', text: 'Please enter customer name!' }); return; }
+            
+            var opt = sel.options[sel.selectedIndex];
+            var pname = opt.getAttribute('data-name');
+            var foundation = opt.getAttribute('data-foundation');
+            var bp = parseFloat(opt.getAttribute('data-price'));
+            var stock = parseInt(opt.getAttribute('data-stock'));
+            var qty = parseInt(document.getElementById('sellQuantity').value) || 0;
+            var sp = parseFloat(document.getElementById('sellingPrice').value) || 0;
+            var customerPhone = document.getElementById('customerPhone').value.trim();
+            
+            if (qty <= 0) { Swal.fire({ icon: 'warning', title: 'Error', text: 'Enter quantity!' }); return; }
+            if (sp <= 0) { Swal.fire({ icon: 'warning', title: 'Error', text: 'Enter selling price!' }); return; }
+            if (qty > stock) { Swal.fire({ icon: 'error', title: 'Error', text: 'Not enough stock! Max: ' + stock }); return; }
+            
+            var cost = bp * qty;
+            var revenue = sp * qty;
+            var pl = revenue - cost;
+            var newStock = stock - qty;
+            
+            try {
+                // Save sale with customer info
+                await addDoc(collection(db, 'sales'), {
+                    purchaseId: sel.value,
+                    productName: pname,
+                    foundationName: foundation,
+                    customerName: customerName,
+                    customerPhone: customerPhone,
+                    purchasePricePerUnit: bp,
+                    sellPricePerUnit: sp,
+                    quantitySold: qty,
+                    totalCost: cost,
+                    totalRevenue: revenue,
+                    profitLoss: pl,
+                    date: TD(),
+                    userId: uid,
+                    createdAt: new Date().toISOString()
+                });
+                
+                // Update stock
+                await updateDoc(doc(db, 'purchases', sel.value), { stockRemaining: newStock });
+                
+                // Add to P&L
+                if (pl !== 0) {
+                    await addDoc(collection(db, 'profitLossEntries'), {
+                        type: pl > 0 ? 'profit' : 'loss',
+                        productName: pname,
+                        customerName: customerName,
+                        amount: Math.abs(pl),
+                        source: 'auto',
+                        date: TD(),
+                        userId: uid,
+                        createdAt: new Date().toISOString()
+                    });
+                }
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: '✅ Sale Recorded!',
+                    html: '<div class="text-left"><p><b>Customer:</b> ' + customerName + '</p><p><b>Product:</b> ' + pname + '</p><p>Qty: ' + qty + ' | Revenue: ' + FC(revenue) + '</p><p class="font-bold ' + (pl >= 0 ? 'text-green-600' : 'text-red-600') + '">' + (pl >= 0 ? 'Profit' : 'Loss') + ': ' + FC(Math.abs(pl)) + '</p></div>',
+                    confirmButtonColor: '#059669'
+                });
+                
+                // Reset form
+                document.getElementById('customerName').value = '';
+                document.getElementById('customerPhone').value = '';
+                document.getElementById('sellQuantity').value = '';
+                document.getElementById('sellingPrice').value = '';
+                document.getElementById('productDetails').style.display = 'none';
+                document.getElementById('profitLossDisplay').style.display = 'none';
+                document.getElementById('productSelect').value = '';
+                
+                loadProducts();
+                loadSalesHistory();
+                
+            } catch(e) { Swal.fire({ icon: 'error', title: 'Error', text: e.message }); }
+        };
+
+        // ============ LOAD SALES HISTORY ============
+        async function loadSalesHistory() {
+            var uid = UID();
+            if (!uid) return;
+            
+            var fd = document.getElementById('filterDate').value || TD();
+            var tbody = document.getElementById('salesTableBody');
+            tbody.innerHTML = '<tr><td colspan="8" class="text-center py-4">Loading...</td></tr>';
+            
+            try {
+                var snap = await getDocs(query(collection(db, 'sales'), where('userId', '==', uid)));
+                var docs = [];
+                snap.forEach(function(d) { if (d.data().date === fd) docs.push({ id: d.id, data: d.data() }); });
+                docs.sort(function(a, b) { return new Date(b.data.createdAt || 0) - new Date(a.data.createdAt || 0); });
+                
+                tbody.innerHTML = '';
+                if (docs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="text-center py-8 text-gray-500">No sales for ' + fd + '</td></tr>';
+                    return;
+                }
+                
+                docs.forEach(function(d) {
+                    var dt = d.data;
+                    var isProfit = (dt.profitLoss || 0) >= 0;
+                    tbody.innerHTML += '<tr class="border-b hover:bg-gray-50">' +
+                        '<td class="p-3 text-sm">' + (dt.date || '-') + '</td>' +
+                        '<td class="p-3 text-sm font-medium">' + (dt.customerName || '-') + '</td>' +
+                        '<td class="p-3 text-sm">' + (dt.productName || '-') + '</td>' +
+                        '<td class="p-3 text-center">' + (dt.quantitySold || 0) + '</td>' +
+                        '<td class="p-3 text-right text-sm">' + FC(dt.sellPricePerUnit || 0) + '</td>' +
+                        '<td class="p-3 text-right text-sm font-semibold">' + FC(dt.totalRevenue || 0) + '</td>' +
+                        '<td class="p-3 text-right font-bold ' + (isProfit ? 'text-green-600' : 'text-red-600') + '">' + (isProfit ? '📈' : '📉') + ' ' + FC(Math.abs(dt.profitLoss || 0)) + '</td>' +
+                        '<td class="p-3 text-center"><button class="text-red-600" onclick="deleteSale(\'' + d.id + '\')"><i class="fas fa-trash"></i></button></td>' +
+                        '</tr>';
+                });
+            } catch(e) { tbody.innerHTML = '<tr><td colspan="8" class="text-center py-8 text-red-500">Error</td></tr>'; }
+        }
+
+        window.loadSalesHistory = loadSalesHistory;
+        window.deleteSale = async function(id) {
+            var r = await Swal.fire({ title: 'Delete?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#d33', confirmButtonText: 'Delete' });
+            if (r.isConfirmed) { await deleteDoc(doc(db, 'sales', id)); Swal.fire({ icon: 'success', title: 'Deleted!', timer: 1500 }); loadSalesHistory(); }
+        };
+        window.printSalesReport = function() { window.print(); };
+        window.exportSalesCSV = function() {
+            var rows = document.querySelectorAll('#salesTableBody tr');
+            var csv = ['Date,Customer,Product,Qty,Price,Revenue,Profit/Loss'];
+            rows.forEach(function(row) {
+                var cols = row.querySelectorAll('td');
+                if (cols.length >= 7) csv.push([cols[0].textContent, cols[1].textContent, cols[2].textContent, cols[3].textContent, cols[4].textContent, cols[5].textContent, cols[6].textContent].join(','));
+            });
+            var blob = new Blob(['\uFEFF' + csv.join('\n')], { type: 'text/csv' });
+            var link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'sales_' + TD() + '.csv'; link.click();
+        };
+
+        // ============ INIT ============
+        document.getElementById('filterDate').value = TD();
+        loadProducts();
+        loadSalesHistory();
+
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            var m = document.getElementById('dropdownMenu'); var i = document.getElementById('menuIcon');
+            m.classList.toggle('hidden'); i.className = m.classList.contains('hidden') ? 'fas fa-bars text-2xl' : 'fas fa-times text-2xl';
+        });
+        var cp = window.location.pathname.split('/').pop();
+        document.querySelectorAll('.menu-item').forEach(function(item) {
+            if (item.getAttribute('href') === cp) { item.classList.remove('text-gray-600'); item.classList.add('text-emerald-600', 'font-semibold', 'bg-emerald-50'); }
+        });
+    </script>
+</body>
+</html>

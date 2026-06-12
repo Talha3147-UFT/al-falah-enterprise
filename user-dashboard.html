@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="shortcut icon" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="nav-animation.css">
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="assets/logo.png" class="h-10 w-10 object-contain rounded-lg">
+                    <span class="text-lg font-bold text-gray-800">Al-Falah Enterprise</span>
+                </div>
+                <button id="menuBtn" class="text-gray-600 hover:text-emerald-600 p-2 focus:outline-none">
+                    <i class="fas fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+            <div id="dropdownMenu" class="hidden pb-4 border-t mt-2 animate-fadeIn">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1 pt-2">
+                    <a href="user-dashboard.html" class="menu-item px-4 py-3 rounded-lg text-emerald-600 bg-emerald-50 font-semibold flex items-center gap-2"><i class="fas fa-tachometer-alt w-5"></i>Dashboard</a>
+                    <a href="purchases.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-shopping-cart w-5"></i>Purchases</a>
+                    <a href="sales.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-chart-line w-5"></i>Sales</a>
+                    <a href="expenses.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-money-bill-wave w-5"></i>Expenses</a>
+                    <a href="profit-loss.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-calculator w-5"></i>P&L</a>
+                    <a href="collections.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-layer-group w-5"></i>Collections</a>
+                    <a href="balance.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-balance-scale w-5"></i>Balance</a>
+                    <a href="due-tracker.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-hand-holding-usd w-5"></i>Due</a>
+                    <a href="stock-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-boxes w-5"></i>Stock</a>
+                    <a href="party-ledger.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-book w-5"></i>Ledger</a>
+                    <a href="reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>Reports</a>
+                    <a href="daily-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-clipboard-list w-5"></i>Summary</a>
+                    <a href="invoice-generator.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-invoice w-5"></i>Invoice</a>
+                    <a href="user-reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-paper-plane w-5"></i>Send Report</a>
+                    <a href="account.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-user-circle w-5"></i>Account</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- Welcome -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800" id="welcomeMessage">Welcome back!</h1>
+            <p class="text-gray-500" id="currentDate"></p>
+            <div class="mt-2 flex items-center gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">⭐ Admin User</span>
+                <span class="text-xs text-gray-400">You can view data and submit reports</span>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex justify-between items-center">
+                    <div><p class="text-sm text-gray-500">Today's Sales</p><h3 class="text-2xl font-bold text-blue-600" id="todaySales">৳0</h3></div>
+                    <div class="bg-blue-100 rounded-full p-3"><i class="fas fa-chart-line text-blue-600 text-xl"></i></div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex justify-between items-center">
+                    <div><p class="text-sm text-gray-500">Today's Cost</p><h3 class="text-2xl font-bold text-orange-600" id="todayPurchases">৳0</h3></div>
+                    <div class="bg-orange-100 rounded-full p-3"><i class="fas fa-shopping-cart text-orange-600 text-xl"></i></div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex justify-between items-center">
+                    <div><p class="text-sm text-gray-500">Today's Expenses</p><h3 class="text-2xl font-bold text-red-600" id="todayExpenses">৳0</h3></div>
+                    <div class="bg-red-100 rounded-full p-3"><i class="fas fa-money-bill-wave text-red-600 text-xl"></i></div>
+                </div>
+            </div>
+            <div class="bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex justify-between items-center">
+                    <div><p class="text-sm text-emerald-100">Net Balance</p><h3 class="text-2xl font-bold" id="netBalance">৳0</h3></div>
+                    <div class="bg-white/20 rounded-full p-3"><i class="fas fa-balance-scale text-white text-xl"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity & Quick Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
+                <h3 class="font-semibold text-gray-800 mb-4"><i class="fas fa-clock text-emerald-600 mr-2"></i>Recent Activity</h3>
+                <div id="recentActivity" class="space-y-2 max-h-80 overflow-y-auto"></div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h3 class="font-semibold text-gray-800 mb-4"><i class="fas fa-bolt text-yellow-500 mr-2"></i>Quick Actions</h3>
+                <div class="space-y-3">
+                    <a href="purchases.html" class="flex items-center gap-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg p-3 transition-all font-medium"><i class="fas fa-plus-circle w-5 text-center"></i>New Purchase</a>
+                    <a href="sales.html" class="flex items-center gap-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg p-3 transition-all font-medium"><i class="fas fa-cart-plus w-5 text-center"></i>New Sale</a>
+                    <a href="expenses.html" class="flex items-center gap-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-lg p-3 transition-all font-medium"><i class="fas fa-receipt w-5 text-center"></i>Add Expense</a>
+                    <a href="user-reports.html" class="flex items-center gap-3 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-lg p-3 transition-all font-medium"><i class="fas fa-paper-plane w-5 text-center"></i>Submit Report</a>
+                    <a href="profit-loss.html" class="flex items-center gap-3 bg-yellow-50 hover:bg-yellow-100 text-yellow-700 rounded-lg p-3 transition-all font-medium"><i class="fas fa-calculator w-5 text-center"></i>P&L Calculator</a>
+                    <hr>
+                    <button onclick="logout()" class="flex items-center gap-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg p-3 transition-all font-medium w-full"><i class="fas fa-sign-out-alt w-5 text-center"></i>Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/user-app.js"></script>
+    <script type="module">
+        import { auth, db } from './js/firebase-config.js';
+        import { signOut } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+        import { collection, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+        function FC(a) { return '৳' + parseFloat(a || 0).toLocaleString('en-BD', {minimumFractionDigits:2}); }
+        function TD() { return new Date().toISOString().split('T')[0]; }
+        
+        function getUserId() {
+            const s = localStorage.getItem('alfalah_user') || sessionStorage.getItem('alfalah_user');
+            if (s) { try { return JSON.parse(s).uid; } catch (e) {} }
+            return auth.currentUser?.uid;
+        }
+        
+        function getUserName() {
+            const s = localStorage.getItem('alfalah_user') || sessionStorage.getItem('alfalah_user');
+            if (s) { try { return JSON.parse(s).username; } catch (e) {} }
+            return 'Admin User';
+        }
+
+        // Check auth
+        const uid = getUserId();
+        if (!uid) { window.location.href = 'login.html'; }
+
+        // Welcome message
+        document.getElementById('welcomeMessage').textContent = 'Welcome back, ' + getUserName() + '!';
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+
+        // Load dashboard data
+        async function loadDashboard() {
+            const today = TD();
+            
+            try {
+                const [salesSnap, expensesSnap] = await Promise.all([
+                    getDocs(query(collection(db, 'sales'), where('userId', '==', uid))),
+                    getDocs(query(collection(db, 'expenses'), where('userId', '==', uid)))
+                ]);
+                
+                const ts = salesSnap.docs.filter(d => d.data().date === today).reduce((s, d) => s + (d.data().totalRevenue || d.data().sellingPrice || 0), 0);
+                const tp = salesSnap.docs.filter(d => d.data().date === today).reduce((s, d) => s + (d.data().totalCost || ((d.data().purchasePricePerUnit || 0) * (d.data().quantitySold || 0))), 0);
+                const te = expensesSnap.docs.filter(d => d.data().date === today).reduce((s, d) => s + (d.data().cost || 0), 0);
+                
+                document.getElementById('todaySales').textContent = FC(ts);
+                document.getElementById('todayPurchases').textContent = FC(tp);
+                document.getElementById('todayExpenses').textContent = FC(te);
+                document.getElementById('netBalance').textContent = FC(ts - tp - te);
+                
+                // Recent activity
+                const recentDocs = salesSnap.docs.filter(d => d.data().date === today).sort((a, b) => new Date(b.data().createdAt || 0) - new Date(a.data().createdAt || 0)).slice(0, 5);
+                const activityDiv = document.getElementById('recentActivity');
+                
+                if (recentDocs.length === 0) {
+                    activityDiv.innerHTML = '<p class="text-gray-500 text-center py-4">No sales recorded today</p>';
+                } else {
+                    activityDiv.innerHTML = recentDocs.map(d => {
+                        const dt = d.data();
+                        return `<div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg"><div><p class="font-semibold text-sm">${dt.productName}</p><p class="text-xs text-gray-500">Qty: ${dt.quantitySold} | Customer: ${dt.customerName || '-'}</p></div><span class="text-emerald-600 font-semibold text-sm">${FC(dt.totalRevenue || dt.sellingPrice || 0)}</span></div>`;
+                    }).join('');
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        loadDashboard();
+
+        // Logout
+        window.logout = async function() {
+            const r = await Swal.fire({ title: 'Logout?', icon: 'question', showCancelButton: true, confirmButtonColor: '#059669', cancelButtonColor: '#d33', confirmButtonText: 'Yes' });
+            if (r.isConfirmed) {
+                localStorage.removeItem('alfalah_user');
+                sessionStorage.removeItem('alfalah_user');
+                await signOut(auth);
+                window.location.href = 'login.html';
+            }
+        };
+
+        // Mobile menu
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const m = document.getElementById('dropdownMenu');
+            const i = document.getElementById('menuIcon');
+            m.classList.toggle('hidden');
+            i.className = m.classList.contains('hidden') ? 'fas fa-bars text-2xl' : 'fas fa-times text-2xl';
+        });
+
+        // Active page
+        const cp = window.location.pathname.split('/').pop();
+        document.querySelectorAll('.menu-item').forEach(item => {
+            if (item.getAttribute('href') === cp) {
+                item.classList.remove('text-gray-600');
+                item.classList.add('text-emerald-600', 'font-semibold', 'bg-emerald-50');
+            }
+        });
+    </script>
+</body>
+</html>

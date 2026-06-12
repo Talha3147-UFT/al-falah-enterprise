@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png"><link rel="shortcut icon" href="assets/logo.png"><link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="nav-animation.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-lg sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4"><div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3"><img src="assets/logo.png" class="h-10 w-10 object-contain rounded-lg"><span class="text-lg font-bold text-gray-800">Al-Falah Enterprise</span></div>
+        <button id="menuBtn" class="text-gray-600 hover:text-emerald-600 p-2 focus:outline-none"><i class="fas fa-bars text-2xl" id="menuIcon"></i></button>
+    </div>
+    <div id="dropdownMenu" class="hidden pb-4 border-t mt-2 animate-fadeIn">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 pt-2">
+            <a href="dashboard.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-tachometer-alt w-5"></i>Dashboard</a>
+            <a href="purchases.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-shopping-cart w-5"></i>Purchases</a>
+            <a href="sales.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-chart-line w-5"></i>Sales</a>
+            <a href="expenses.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-money-bill-wave w-5"></i>Expenses</a>
+            <a href="profit-loss.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-calculator w-5"></i>P&L</a>
+            <a href="collections.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-layer-group w-5"></i>Collections</a>
+            <a href="balance.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-balance-scale w-5"></i>Balance</a>
+            <a href="due-tracker.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-hand-holding-usd w-5"></i>Due</a>
+            <a href="stock-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-boxes w-5"></i>Stock</a>
+            <a href="party-ledger.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-book w-5"></i>Ledger</a>
+            <a href="reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>Reports</a>
+            <a href="daily-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-clipboard-list w-5"></i>Summary</a>
+            <a href="invoice-generator.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-invoice w-5"></i>Invoice</a>
+            <a href="data-backup.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-database w-5"></i>Backup</a>
+            <a href="settings.html" class="menu-item px-4 py-3 rounded-lg text-emerald-600 bg-emerald-50 font-semibold flex items-center gap-2"><i class="fas fa-cog w-5"></i>Settings</a>
+            <a href="account.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-user-circle w-5"></i>Account</a>
+        </div>
+    </div></div></nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">⚙️ System Settings</h1>
+
+        <!-- Currency -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-blue-100 rounded-full p-2"><i class="fas fa-money-bill-wave text-blue-600"></i></div>
+                <h3 class="font-bold text-lg">Currency Settings</h3>
+            </div>
+            <div class="max-w-md">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Currency Symbol</label>
+                <input type="text" id="currencySymbol" class="w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" value="৳" onchange="saveSetting('currencySymbol',this.value)">
+                <p class="text-xs text-gray-500 mt-1">This symbol will be used throughout the system.</p>
+            </div>
+        </div>
+
+        <!-- Display -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-purple-100 rounded-full p-2"><i class="fas fa-desktop text-purple-600"></i></div>
+                <h3 class="font-bold text-lg">Display Settings</h3>
+            </div>
+            <div class="space-y-4 max-w-md">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Low Stock Alert Threshold</span>
+                    <input type="number" id="lowStockThreshold" class="w-24 px-3 py-2 border rounded-lg text-center focus:ring-2 focus:ring-emerald-500" value="10" min="1" onchange="saveSetting('lowStockThreshold',this.value)">
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Items Per Page</span>
+                    <select id="itemsPerPage" class="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" onchange="saveSetting('itemsPerPage',this.value)">
+                        <option value="10">10</option>
+                        <option value="25" selected>25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Date Format</span>
+                    <select id="dateFormat" class="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500" onchange="saveSetting('dateFormat',this.value)">
+                        <option value="YYYY-MM-DD" selected>YYYY-MM-DD</option>
+                        <option value="DD-MM-YYYY">DD-MM-YYYY</option>
+                        <option value="MM-DD-YYYY">MM-DD-YYYY</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-yellow-100 rounded-full p-2"><i class="fas fa-bell text-yellow-600"></i></div>
+                <h3 class="font-bold text-lg">Notification Settings</h3>
+            </div>
+            <div class="space-y-4 max-w-md">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Low Stock Alerts</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" checked onchange="saveSetting('lowStockNotify',this.checked)">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-emerald-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-700">Due Date Reminders</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only peer" checked onchange="saveSetting('dueReminders',this.checked)">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-emerald-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="bg-emerald-100 rounded-full p-2"><i class="fas fa-info-circle text-emerald-600"></i></div>
+                <h3 class="font-bold text-lg">About System</h3>
+            </div>
+            <div class="space-y-2 text-sm text-gray-600">
+                <p><strong>Application:</strong> Al-Falah Enterprise Management System</p>
+                <p><strong>Version:</strong> 3.0.0</p>
+                <p><strong>Developer:</strong> Umar Faruk Talha</p>
+                <p><strong>Contact:</strong> alfalahenterprise203@gmail.com</p>
+                <p><strong>Tech Stack:</strong> HTML5, Tailwind CSS, JavaScript, Firebase</p>
+                <p><strong>Last Updated:</strong> 2025</p>
+            </div>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="mt-8 text-center">
+            <button onclick="resetSettings()" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all font-semibold">
+                <i class="fas fa-undo mr-2"></i>Reset to Default Settings
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function saveSetting(key, value) {
+            localStorage.setItem('alfalah_' + key, JSON.stringify(value));
+            console.log('✅ Setting saved:', key, value);
+        }
+        
+        function loadSettings() {
+            var defaults = {
+                currencySymbol: '৳',
+                lowStockThreshold: 10,
+                itemsPerPage: 25,
+                dateFormat: 'YYYY-MM-DD',
+                lowStockNotify: true,
+                dueReminders: true
+            };
+            
+            Object.keys(defaults).forEach(function(key) {
+                var saved = localStorage.getItem('alfalah_' + key);
+                var el = document.getElementById(key);
+                if (el) {
+                    var val = saved ? JSON.parse(saved) : defaults[key];
+                    if (el.type === 'checkbox') {
+                        el.checked = val;
+                    } else {
+                        el.value = val;
+                    }
+                }
+            });
+        }
+        
+        window.resetSettings = function() {
+            if (confirm('Reset all settings to default values?')) {
+                Object.keys({
+                    currencySymbol: '৳',
+                    lowStockThreshold: 10,
+                    itemsPerPage: 25,
+                    dateFormat: 'YYYY-MM-DD',
+                    lowStockNotify: true,
+                    dueReminders: true
+                }).forEach(function(key) {
+                    localStorage.removeItem('alfalah_' + key);
+                });
+                loadSettings();
+                alert('Settings reset to default!');
+            }
+        };
+        
+        loadSettings();
+        
+        document.getElementById('menuBtn').addEventListener('click',function(){var m=document.getElementById('dropdownMenu');var i=document.getElementById('menuIcon');m.classList.toggle('hidden');i.className=m.classList.contains('hidden')?'fas fa-bars text-2xl':'fas fa-times text-2xl'});
+        var cp=window.location.pathname.split('/').pop();document.querySelectorAll('.menu-item').forEach(function(item){if(item.getAttribute('href')===cp){item.classList.remove('text-gray-600');item.classList.add('text-emerald-600','font-semibold','bg-emerald-50')}});
+    </script>
+    <script src="js/session-guard.js"></script>
+    <script type="module" src="js/user-app.js"></script>
+</body>
+</html>

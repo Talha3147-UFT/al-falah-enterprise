@@ -1,0 +1,95 @@
+/* ============================================
+   nav-animation.css
+   নেভিগেশন বার - মাঝখানের রেখা অ্যানিমেশন
+   ============================================ */
+
+/* নেভিগেশন আইটেমের মূল স্টাইল */
+.nav-item {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* 1. মাঝখান দিয়ে রেখা আসার অ্যানিমেশন */
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        #ffffff, 
+        #ffffff, 
+        #ffffff, 
+        transparent);
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* হোভার করলে রেখা বের হবে */
+.nav-item:hover::after {
+    width: 85%;
+    opacity: 1;
+}
+
+/* 2. রিপল ইফেক্ট (বাম থেকে ডানে আলো) */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.15), 
+        transparent);
+    transition: left 0.5s ease;
+    z-index: 0;
+}
+
+.nav-item:hover::before {
+    left: 100%;
+}
+
+/* 3. হোভারে আইটেম ডানে সরে যাবে */
+.nav-item:hover {
+    transform: translateX(6px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 4. আইকন বাউন্স অ্যানিমেশন */
+.nav-item:hover .nav-icon {
+    animation: navIconBounce 0.3s ease-out;
+}
+
+@keyframes navIconBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+/* 5. অ্যাক্টিভ আইটেমের জন্য রেখা সবসময় থাকবে */
+.nav-item.active::after {
+    width: 85%;
+    opacity: 1;
+}
+
+.nav-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 3px solid white;
+}
+
+/* 6. ক্লিক ইফেক্ট */
+.nav-item:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}

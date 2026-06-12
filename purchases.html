@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchases - Al-Falah Enterprise</title>
+    <link rel="icon" type="image/png" href="assets/logo.png"><link rel="shortcut icon" href="assets/logo.png"><link rel="apple-touch-icon" href="assets/logo.png">
+    <meta name="theme-color" content="#059669">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="nav-animation.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-lg sticky top-0 z-50"><div class="max-w-7xl mx-auto px-4"><div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-3"><img src="assets/logo.png" class="h-10 w-10 object-contain rounded-lg"><span class="text-lg font-bold text-gray-800">Al-Falah Enterprise</span></div>
+        <button id="menuBtn" class="text-gray-600 hover:text-emerald-600 p-2 focus:outline-none"><i class="fas fa-bars text-2xl" id="menuIcon"></i></button>
+    </div>
+    <div id="dropdownMenu" class="hidden pb-4 border-t mt-2 animate-fadeIn">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 pt-2">
+            <a href="dashboard.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-tachometer-alt w-5"></i>Dashboard</a>
+            <a href="purchases.html" class="menu-item px-4 py-3 rounded-lg text-emerald-600 bg-emerald-50 font-semibold flex items-center gap-2"><i class="fas fa-shopping-cart w-5"></i>Purchases</a>
+            <a href="sales.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-chart-line w-5"></i>Sales</a>
+            <a href="expenses.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-money-bill-wave w-5"></i>Expenses</a>
+            <a href="profit-loss.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-calculator w-5"></i>P&L</a>
+            <a href="collections.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-layer-group w-5"></i>Collections</a>
+            <a href="balance.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-balance-scale w-5"></i>Balance</a>
+            <a href="due-tracker.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-hand-holding-usd w-5"></i>Due</a>
+            <a href="stock-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-boxes w-5"></i>Stock</a>
+            <a href="party-ledger.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-book w-5"></i>Ledger</a>
+            <a href="reports.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-alt w-5"></i>Reports</a>
+            <a href="daily-summary.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-clipboard-list w-5"></i>Summary</a>
+            <a href="invoice-generator.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-file-invoice w-5"></i>Invoice</a>
+            <a href="data-backup.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-database w-5"></i>Backup</a>
+            <a href="settings.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-cog w-5"></i>Settings</a>
+            <a href="account.html" class="menu-item px-4 py-3 rounded-lg text-gray-600 hover:text-emerald-600 hover:bg-emerald-50 flex items-center gap-2"><i class="fas fa-user-circle w-5"></i>Account</a>
+        </div>
+    </div></div></nav>
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8"><h1 class="text-3xl font-bold">Daily Purchase</h1><div class="flex gap-2"><button onclick="printPurchases()" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Print</button><button onclick="exportPurchasesCSV()" class="bg-green-600 text-white px-4 py-2 rounded-lg">CSV</button><button onclick="openAddModal()" class="bg-emerald-600 text-white px-5 py-2 rounded-lg">Add</button></div></div>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden"><table id="purchasesTable" class="w-full"><thead class="bg-emerald-600 text-white"><tr><th class="p-3">Select</th><th class="p-3">Foundation</th><th class="p-3">Product</th><th class="p-3">Date</th><th class="p-3">Price</th><th class="p-3">Qty</th><th class="p-3">Stock</th><th class="p-3">Actions</th></tr></thead><tbody id="purchasesTableBody"><tr><td colspan="8" class="text-center py-8 text-gray-500">Loading...</td></tr></tbody></table></div>
+    </div>
+    <div id="purchaseModal" class="modal"><div class="modal-content"><div class="flex justify-between mb-6"><h2 class="text-2xl font-bold" id="modalTitle">Add Purchase</h2><button onclick="closeModal()" class="text-2xl">&times;</button></div><form id="purchaseForm" class="space-y-4"><input type="hidden" id="purchaseId"><input type="text" id="foundationName" class="w-full px-4 py-2 border rounded-lg" placeholder="Foundation" required><input type="text" id="productName" class="w-full px-4 py-2 border rounded-lg" placeholder="Product" required><input type="date" id="purchaseDate" class="w-full px-4 py-2 border rounded-lg" required><input type="number" id="price" class="w-full px-4 py-2 border rounded-lg" placeholder="Price" required><input type="number" id="quantity" class="w-full px-4 py-2 border rounded-lg" placeholder="Qty" required><input type="number" id="stockRemaining" class="w-full px-4 py-2 border rounded-lg bg-gray-100" readonly><div class="flex justify-end gap-4"><button type="button" onclick="closeModal()" class="px-6 py-2 border rounded-lg">Cancel</button><button type="submit" class="px-6 py-2 bg-emerald-600 text-white rounded-lg">Save</button></div></form></div></div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script src="js/session-guard.js"></script>
+    <script type="module" src="js/user-app.js"></script>
+    <script>document.getElementById('menuBtn').addEventListener('click',function(){var m=document.getElementById('dropdownMenu');var i=document.getElementById('menuIcon');m.classList.toggle('hidden');i.className=m.classList.contains('hidden')?'fas fa-bars text-2xl':'fas fa-times text-2xl'});var cp=window.location.pathname.split('/').pop();document.querySelectorAll('.menu-item').forEach(function(item){if(item.getAttribute('href')===cp){item.classList.remove('text-gray-600');item.classList.add('text-emerald-600','font-semibold','bg-emerald-50')}});</script>
+</body>
+</html>
